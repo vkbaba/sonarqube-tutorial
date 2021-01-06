@@ -11,10 +11,10 @@ https://www.katacoda.com/courses/cicd/sonarqube
 ```git clone https://github.com/vkbaba/sonarqube-tutorial.git```   
 ```cd sonarqube-tutorial```   
 1. Get a html file you want to scan   
-```wget http://abehiroshi.la.coocan.jp/top.htm -o top.html```   
+```wget http://abehiroshi.la.coocan.jp/top.htm -O top.html```   
 1. Run sonnar-scanner   
-```../sonar-scanner-4.5.0.2216-linux/bin/sonar-scanner -Dsonar.host.url=http://172.17.0.10:31111 -Dproject.settings=./sonar-project.properties```   
-sonar.host.url contains the IP address of the worker node, and you can check it by `kubectl get node -o wide`   
+```NODE_IP=`kubectl get node node01 -o jsonpath={.status.addresses[].address}` ```   
+```../sonar-scanner-4.5.0.2216-linux/bin/sonar-scanner -Dsonar.host.url=http://$NODE_IP:31111 -Dproject.settings=./sonar-project.properties```   
 1. Access SonarQube Dashboard
 
 
